@@ -1,0 +1,7 @@
+Django==3.2.14
+mysqlclient
+django-cors-headers
+requests
+gunicorn
+whitenoise
+
