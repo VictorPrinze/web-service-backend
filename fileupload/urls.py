@@ -7,9 +7,7 @@ urlpatterns = [
     path('create_namespace/', views.create_namespace, name='create_namespace'),
     path('connect_database/', views.connect_database, name='connect_database'),
     path('files/', views.get_files, name='get_files'),
-     path('active-database/', views.get_active_database, name='get_active_database'),
+    path('active-database/', views.get_active_database, name='get_active_database'),
     path('active-repository/', views.get_active_repository, name='get_active_repository'),
-
+    path('execute-query/', views.execute_sparql_query, name='execute_sparql_query'),
 ]
-
-

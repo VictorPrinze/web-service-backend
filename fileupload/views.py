@@ -202,8 +202,6 @@ def get_active_repository(request):
                         namespaces.append(namespace.text)
                 
                 if namespaces:
-                    # For simplicity, we're considering all namespaces as active repositories
-                    # You may need to adjust this logic based on your specific requirements
                     return JsonResponse({'active_repositories': namespaces})
                 else:
                     return JsonResponse({"message": "No active repositories found"}, status=404)
@@ -215,4 +213,28 @@ def get_active_repository(request):
             return JsonResponse({"message": "Failed to parse Blazegraph response"}, status=500)
         except Exception as e:
             return JsonResponse({"message": f"Failed to fetch active repositories: {str(e)}"}, status=500)
+    return JsonResponse({"error": "Invalid request method."}, status=405)
+
+@csrf_exempt
+def execute_sparql_query(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            query = data.get('query')
+            namespace = data.get('namespace', 'kb')  # default to 'kb' if not specified
+            
+            url = f"http://172.17.0.1:9999/blazegraph/namespace/{namespace}/sparql"
+            headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+            payload = {'query': query}
+            
+            response = requests.post(url, headers=headers, data=payload)
+            
+            if response.status_code == 200:
+                return JsonResponse(response.json())
+            else:
+                return JsonResponse({"error": f"Query failed. Status code: {response.status_code}, Response: {response.text}"}, status=response.status_code)
+        
+        except Exception as e:
+            return JsonResponse({"error": f"An error occurred: {str(e)}"}, status=500)
+    
     return JsonResponse({"error": "Invalid request method."}, status=405)
