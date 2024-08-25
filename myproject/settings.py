@@ -27,8 +27,7 @@ SECRET_KEY = 'django-insecure-joib=yh)l@$fjb4d+1ep-rs##aeo@wvy8wu$w^xd1wr5+e!y@3
 DEBUG = False
 
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
-
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,web-service-backend-rpw1.onrender.com').split(',')
 
 # Application definition
 
