@@ -10,12 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -25,7 +23,6 @@ SECRET_KEY = 'django-insecure-joib=yh)l@$fjb4d+1ep-rs##aeo@wvy8wu$w^xd1wr5+e!y@3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,web-service-backend-rpw1.onrender.com').split(',')
 
@@ -77,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -109,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Logging configuration
 LOGGING = {
@@ -146,7 +141,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -160,3 +154,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Blazegraph settings
+BLAZEGRAPH_HOST = os.getenv('BLAZEGRAPH_HOST', '172.214.246.107')
+BLAZEGRAPH_PORT = os.getenv('BLAZEGRAPH_PORT', '9999')
+BLAZEGRAPH_NAMESPACE = os.getenv('BLAZEGRAPH_NAMESPACE', 'kb')  # Default namespace
