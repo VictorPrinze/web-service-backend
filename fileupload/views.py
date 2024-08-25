@@ -34,7 +34,7 @@ def create_database(request):
             'com.bigdata.rdf.sail.incremental': 'false',
         }
 
-        url = f"http://172.17.0.1:9999/blazegraph/namespace/{namespace}"
+        url = f"http://172.214.246.107:9999/blazegraph/namespace/{namespace}"
         response = requests.post(url, json={'properties': properties})
 
         if response.status_code == 200:
@@ -62,7 +62,7 @@ def create_namespace(request):
 
             headers = {"Content-Type": "text/plain"}
             
-            url = "http://172.17.0.1:9999/blazegraph/namespace"
+            url = "http://172.214.246.107:9999/blazegraph/namespace"
             
             print(f"Sending request to: {url}")
             print(f"Request payload: {properties_str}")
@@ -145,7 +145,7 @@ def get_active_database(request):
     if request.method == 'GET':
         try:
             logger.info("Attempting to fetch active database")
-            url = "http://172.17.0.1:9999/blazegraph/namespace"
+            url = "http://172.214.246.107:9999/blazegraph/namespace"
             logger.info(f"Sending GET request to: {url}")
             response = requests.get(url, timeout=10)
             logger.info(f"Received response with status code: {response.status_code}")
@@ -188,7 +188,7 @@ def get_active_database(request):
 def get_active_repository(request):
     if request.method == 'GET':
         try:
-            url = "http://172.17.0.1:9999/blazegraph/namespace"
+            url = "http://172.214.246.107:9999/blazegraph/namespace"
             response = requests.get(url)
             
             content_type = response.headers.get('Content-Type', '')
@@ -223,7 +223,7 @@ def execute_sparql_query(request):
             query = data.get('query')
             namespace = data.get('namespace', 'kb')  # default to 'kb' if not specified
             
-            url = f"http://172.17.0.1:9999/blazegraph/namespace/{namespace}/sparql"
+            url = f"http://172.214.246.107:9999/blazegraph/namespace/{namespace}/sparql"
             headers = {'Content-Type': 'application/x-www-form-urlencoded'}
             payload = {'query': query}
             
